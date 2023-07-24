@@ -408,9 +408,9 @@ class TrigExtra(Scene):
 		base4 = MathTex(r"\sin(\alpha - \beta) = \sin(\alpha)\cos(\beta) - \cos(\alpha)\sin(\beta)",
 				  color = BLACK, font_size = 60).next_to(base3, DOWN)
 
-		f3_1 = MathTex(r"\sin(\alpha - \beta) + \sin(\alpha + \beta) = 2\sin(\alpha)\cos(\beta)",
+		f3_1 = MathTex(r"\sin(\alpha + \beta) + \sin(\alpha - \beta) = 2\sin(\alpha)\cos(\beta)",
 				 color = BLACK, font_size = 60).next_to(base4, DOWN).shift(0.2 * DOWN)
-		f3_2 = MathTex(r"\sin(\alpha)\cos(\beta) = \tfrac{\sin(\alpha + \beta) - \sin(\alpha + \beta)}{2}",
+		f3_2 = MathTex(r"\sin(\alpha)\cos(\beta) = \tfrac{\sin(\alpha + \beta) + \sin(\alpha - \beta)}{2}",
 				 color = BLACK, font_size = 60).next_to(f3_1, DOWN)
 		sur_box_f3 = SurroundingRectangle(f3_2).set_color(color_gradient([BLUE, YELLOW], 100))\
 			.set_stroke(width = 5)
