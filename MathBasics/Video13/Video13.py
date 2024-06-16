@@ -116,7 +116,7 @@ class CircleProps(Scene):
 		rmd_t = MathTex(r"r \!-\! d", font_size = 40, color = BLUE).next_to(
 			Line(pp.get_center(), circ.point_at_angle(po_pp_alpha)), RIGHT).shift(0.4 * LEFT + 0.1 * UP)
 
-		eq4_1 = MathTex(r"a \cdot b = c \cdot d = (r + d) \cdot (c - d)", color = BLACK, font_size = 50)\
+		eq4_1 = MathTex(r"a \cdot b = c \cdot d = (r + d) \cdot (r - d)", color = BLACK, font_size = 50)\
 			.next_to(sur_box1, DOWN).shift(0.3 * DOWN)
 		eq4_2 = MathTex(r"a \cdot b = c \cdot d = r^2 - d^2", color = BLACK, font_size = 50).next_to(eq4_1, DOWN)\
 			.shift(0.2)

@@ -1,5 +1,25 @@
 from manim import *
 
+def build_vgroup_angles(p1, p2, p3, num, r_min, r_max):
+	angles = VGroup()
+
+	def create_angle(i):
+		r = r_min + (r_max - r_min) * i / num
+		return always_redraw(
+			lambda: Angle(
+				Line(p1.get_center(), p2.get_center()),
+				Line(p1.get_center(), p3.get_center()),
+				radius=r,
+				color=BLACK
+			)
+		)
+
+	for i in range(num):
+		angle = create_angle(i)
+		angles.add(angle)
+
+	return angles
+
 class TriangleAngleSum(Scene):
 	def clearEverything(self):
 		self.play(*[FadeOut(mob) for mob in self.mobjects])
@@ -30,18 +50,15 @@ class TriangleAngleSum(Scene):
 		lc = always_redraw(lambda: Line(pa.get_center(), pb.get_center(), color=BLACK, stroke_width = 4.0))
 		lines = VGroup(la, lb, lc)
 
-		anga = always_redraw(lambda: Angle(Line(pa.get_center(), pc.get_center()), 
-									 Line(pa.get_center(), pb.get_center()), radius = 0.5, color = BLACK))
-		angb = always_redraw(lambda: Angle(Line(pb.get_center(), pa.get_center()), 
-									 Line(pb.get_center(), pc.get_center()), radius = 0.5, color = BLACK))
-		angc = always_redraw(lambda: Angle(Line(pc.get_center(), pb.get_center()), 
-									 Line(pc.get_center(), pa.get_center()), radius = 0.5, color = BLACK))
+		anga = build_vgroup_angles(pa, pc, pb, 1, 0.5, 0.5)
+		angb = build_vgroup_angles(pb, pa, pc, 2, 0.4, 0.55)
+		angc = build_vgroup_angles(pc, pb, pa, 3, 0.4, 0.65)
 		angles_m = VGroup(anga, angb, angc)
 
 		anga_t = always_redraw(lambda: MathTex("\\alpha", color=BLACK).next_to(anga, RIGHT)\
 			.shift(0.15 * UP - 0.15 * RIGHT))
 		angb_t = always_redraw(lambda: MathTex("\\beta", color=BLACK).next_to(angb, DOWN)\
-			.shift(0.1 * LEFT + 0.2 * UP))
+			.shift(0.1 * LEFT + 0.15 * UP))
 		angc_t = always_redraw(lambda: MathTex("\\gamma", color=BLACK).next_to(angc, LEFT)\
 			.shift(0.2 * RIGHT + 0.1 * UP))
 		angles_m_t = VGroup(anga_t, angb_t, angc_t)
@@ -120,7 +137,7 @@ class TriangleAngleSum(Scene):
 		self.play(ext_AB_stroke.animate.set_value(4), orange_stroke.animate.set_value(4),
 			ext_AC_stroke.animate.set_value(4), run_time = 2)
 		self.wait(3)
-
+		
 		self.play(ext_AB_stroke.animate.set_value(8), orange_stroke.animate.set_value(8), run_time = 2)
 		self.play(ext_BC_stroke.animate.set_value(8), run_time = 2)
 		self.wait(2)
@@ -131,7 +148,7 @@ class TriangleAngleSum(Scene):
 		self.play(ext_AB_stroke.animate.set_value(4), orange_stroke.animate.set_value(4),
 			ext_BC_stroke.animate.set_value(4), run_time = 2)
 		self.wait(3)
-
+		
 		self.play(ext_AC_stroke.animate.set_value(8), ext_BC_stroke.animate.set_value(8), run_time = 2)
 		self.wait(2)
 		self.play(Create(extra_a_gamma), run_time = 3)
