@@ -1,0 +1,2 @@
+manim -p -ql --frame_rate 30 ExtraVideo1/ExtraVideo1.py ExtraVid1
+manim -p -r 1920,1080 -ql --frame_rate 60 ExtraVideo1/ExtraVideo1.py ExtraVid1
